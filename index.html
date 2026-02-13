@@ -25,7 +25,7 @@
   <h1>Hey Babu❤️</h1>
   <p id="text" style="font-family:'Dancing Script',cursive;font-size:32px;color:black;"><b><i>Will you be my Valentine??</i></b></p>
   <div id="buttons">
-    <button id="yesBtn" class="yes">Yes ❤️</button>
+    <button id="yesBtn" class="yes" onclick="startQuiz()">Yes ❤️</button>
     <button class="no" onmouseover="moveNo(this)" ontouchstart="moveNo(this)">No 😠</button>
   </div>
 </div>
@@ -51,8 +51,7 @@ const questions=[
 let qIndex=0;
 
 // start quiz
-const yesBtn=document.getElementById('yesBtn');
-yesBtn.addEventListener('click',startQuiz);
+document.addEventListener('DOMContentLoaded',()=>{const yesBtn=document.getElementById('yesBtn');if(yesBtn){yesBtn.addEventListener('click',startQuiz);}});
 
 function startQuiz(){
   document.getElementById('buttons').remove();
