@@ -72,7 +72,9 @@ function showQuestion(){
 function checkAnswer(choice){
   const res=document.getElementById('response');
   if(choice===questions[qIndex].correct){
-    res.textContent='Aww you remember 🥹❤️';
+    const showMsg = ![0,1,2,4,5].includes(qIndex);
+    if(showMsg) res.textContent='Aww you remember 🥹❤️';
+    else res.textContent='';
     setTimeout(nextQ,1200);
   }else{
     res.textContent="Hmm wrong 😤 wait… we'll discuss later!";
