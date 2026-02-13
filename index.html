@@ -6,20 +6,18 @@
 <title>Valentine ❤️</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
-  body{margin:0;height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, skyblue, white);color:white;font-family:'Segoe UI',sans-serif;overflow:hidden}
-  .card{background:linear-gradient(135deg,#ffb88c,#ff6a88);color:white;padding:50px 60px;border-radius:16px;text-align:center;box-shadow:0 0 40px rgba(255,75,110,.25);width:80vw;max-width:700px;min-height:260px}
-  h1{color:#000000;font-style:italic}
-  button{padding:12px 22px;border:none;border-radius:25px;margin:10px;font-size:16px;cursor:pointer}
-  .yes{background:white;color:black;font-size:20px;padding:16px 28px;border:2px solid #ff7aa2}
-  .no{background:#ddd}
-  .heart{position:absolute;color:#ff7aa2;animation:float 7s linear infinite}
-  @keyframes float{from{transform:translateY(100vh);opacity:1}to{transform:translateY(-10vh);opacity:0}}
-  canvas{position:fixed;top:0;left:0;pointer-events:none}
-  .final-photo{display:block;margin:10px auto;max-width:70vw;width:200px;height:auto;border-radius:18px;box-shadow:0 8px 20px rgba(0,0,0,.25);}
+body{margin:0;height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, skyblue, white);color:white;font-family:'Segoe UI',sans-serif;overflow:hidden}
+.card{background:linear-gradient(135deg,#ffb88c,#ff6a88);color:white;padding:50px 60px;border-radius:16px;text-align:center;box-shadow:0 0 40px rgba(255,75,110,.25);width:80vw;max-width:700px;min-height:260px}
+h1{color:#000000;font-style:italic}
+button{padding:12px 22px;border:none;border-radius:25px;margin:10px;font-size:16px;cursor:pointer}
+.yes{background:white;color:black;font-size:20px;padding:16px 28px;border:2px solid #ff7aa2}
+.no{background:#ddd}
+.heart{position:absolute;color:#ff7aa2;animation:float 7s linear infinite}
+@keyframes float{from{transform:translateY(100vh);opacity:1}to{transform:translateY(-10vh);opacity:0}}
+.final-photo{display:block;margin:10px auto;max-width:70vw;width:200px;height:auto;border-radius:18px;box-shadow:0 8px 20px rgba(0,0,0,.25);} 
 </style>
 </head>
 <body>
-<canvas id="fire"></canvas>
 
 <div class="card" id="card">
   <h1>Hey Babu❤️</h1>
@@ -29,8 +27,9 @@
     <button class="no" onmouseover="moveNo(this)" ontouchstart="moveNo(this)">No 😠</button>
   </div>
 </div>
+
 <script>
-// ensure function exists before use
+// ensure function exists globally BEFORE usage
 function moveNo(b){
   b.style.position='fixed';
   b.style.left=Math.random()*90+'vw';
@@ -48,13 +47,12 @@ const questions=[
  {q:"What makes me calm instantly?",options:["Your hug 🤗","Talking to you ❤️","Food 😄","Silence / alone time 🌙"],correct:1},
  {q:"My favourite photo of us?",options:["Our wedding day photo 💍","Our late-night photo 🌙","The photo where you’re hugging me 🤗","That mirror selfie we took 🪞","Our first selfie together 📸"],correct:4}
 ];
+
 let qIndex=0;
 
-// start quiz
-document.addEventListener('DOMContentLoaded',()=>{const yesBtn=document.getElementById('yesBtn');if(yesBtn){yesBtn.addEventListener('click',startQuiz);}});
-
 function startQuiz(){
-  document.getElementById('buttons').remove();
+  const btns=document.getElementById('buttons');
+  if(btns) btns.remove();
   showQuestion();
 }
 
@@ -77,15 +75,18 @@ function checkAnswer(choice){
     res.textContent='Aww you remember 🥹❤️';
     setTimeout(nextQ,1200);
   }else{
-    res.innerHTML="Hmm wrong 😤 wait… we'll discuss later!";
+    res.textContent="Hmm wrong 😤 wait… we'll discuss later!";
     setTimeout(nextQ,1500);
   }
 }
 
 function nextQ(){
   qIndex++;
-  if(qIndex<questions.length) showQuestion();
-  else finishLove();
+  if(qIndex<questions.length){
+    showQuestion();
+  }else{
+    finishLove();
+  }
 }
 
 function finishLove(){
@@ -94,17 +95,19 @@ function finishLove(){
     <img src='photo.jpg' class='final-photo'>
     <h1 style='margin-top:20px'>I LOVE YOU ❤️</h1>
   `;
-},300);
 }
 
 // floating hearts
 function heart(){
- const h=document.createElement('div');h.className='heart';h.innerHTML='❤';
- h.style.left=Math.random()*100+'vw';h.style.fontSize=(10+Math.random()*30)+'px';
- document.body.appendChild(h);setTimeout(()=>h.remove(),7000);
+ const h=document.createElement('div');
+ h.className='heart';
+ h.innerHTML='❤';
+ h.style.left=Math.random()*100+'vw';
+ h.style.fontSize=(10+Math.random()*30)+'px';
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),7000);
 }
 setInterval(heart,300);
-
 
 </script>
 </body>
