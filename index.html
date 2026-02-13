@@ -51,6 +51,7 @@ const questions=[
 let qIndex=0;
 
 function startQuiz(){
+  qIndex=0;
   const btns=document.getElementById('buttons');
   if(btns) btns.remove();
   showQuestion();
@@ -59,12 +60,13 @@ function startQuiz(){
 function showQuestion(){
   const card=document.getElementById('card');
   const q=questions[qIndex];
+  if(!q){ finishLove(); return; }
   card.innerHTML=`<h2>${q.q}</h2><div id='opts'></div><p id='response'></p>`;
   const box=document.getElementById('opts');
   q.options.forEach((opt,i)=>{
     const btn=document.createElement('button');
     btn.textContent=opt;
-    btn.onclick=()=>checkAnswer(i+1);
+    btn.onclick=()=>{ document.querySelectorAll('#opts button').forEach(b=>b.disabled=true); checkAnswer(i+1); };
     box.appendChild(btn);
   });
 }
@@ -94,6 +96,9 @@ function nextQ(){
   if(qIndex<questions.length){
     showQuestion();
   }else{
+    finishLove();
+  }
+}else{
     finishLove();
   }
 }
