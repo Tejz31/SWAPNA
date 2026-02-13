@@ -15,11 +15,12 @@
   .heart{position:absolute;color:#ff7aa2;animation:float 7s linear infinite}
   @keyframes float{from{transform:translateY(100vh);opacity:1}to{transform:translateY(-10vh);opacity:0}}
   canvas{position:fixed;top:0;left:0;pointer-events:none}
+  .final-photo{display:block;margin:10px auto;max-width:70vw;width:200px;height:auto;border-radius:18px;box-shadow:0 8px 20px rgba(0,0,0,.25);}
 </style>
 </head>
 <body>
 <canvas id="fire"></canvas>
-<div id="topDecor" style="position:fixed;top:10px;left:0;width:100%;text-align:center;font-size:26px;pointer-events:none">✨💖🎆💞🎇💘✨</div>
+
 <div class="card" id="card">
   <h1>Hey Babu❤️</h1>
   <p id="text" style="font-family:'Dancing Script',cursive;font-size:32px;color:black;"><b><i>Will you be my Valentine??</i></b></p>
@@ -89,10 +90,12 @@ function nextQ(){
 }
 
 function finishLove(){
-  document.getElementById('card').innerHTML=`<h1>I love you ❤️</h1><p>Happy Valentine’s Day</p><img src='photo.jpg' style='width:220px;border-radius:15px'>`;
-  // grand finale fireworks
-  clearInterval(burstTimer);
-  setInterval(()=>{burst();burst();burst();},300);
+  document.getElementById('card').innerHTML=`
+    <h2 style='margin-bottom:20px'>Happy Valentine's Day 💖</h2>
+    <img src='photo.jpg' class='final-photo'>
+    <h1 style='margin-top:20px'>I LOVE YOU ❤️</h1>
+  `;
+},300);
 }
 
 // floating hearts
@@ -103,22 +106,7 @@ function heart(){
 }
 setInterval(heart,300);
 
-// simple top fireworks bursts periodically
-function burst(){
-  for(let i=0;i<25;i++){
-    const s=document.createElement('div');
-    s.textContent='✨';
-    s.style.position='fixed';
-    s.style.top='20px';
-    s.style.left=(Math.random()*100)+'vw';
-    s.style.fontSize=(12+Math.random()*20)+'px';
-    s.style.transition='transform 1s linear, opacity 1s linear';
-    document.body.appendChild(s);
-    setTimeout(()=>{s.style.transform='translateY(120px)';s.style.opacity='0';},50);
-    setTimeout(()=>s.remove(),1100);
-  }
-}
-let burstTimer=setInterval(burst,900);
+
 </script>
 </body>
 </html>
