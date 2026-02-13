@@ -72,11 +72,18 @@ function showQuestion(){
 function checkAnswer(choice){
   const res=document.getElementById('response');
   if(choice===questions[qIndex].correct){
-    const showMsg = ![0,1,2,4,5].includes(qIndex);
-    if(showMsg) res.textContent='Aww you remember 🥹❤️';
-    else res.textContent='';
+    // hide cute message for Q1,2,3,5,6 (index 0,1,2,4,5)
+    if([0,1,2,4,5].includes(qIndex)){
+      res.textContent='';
+    }else{
+      res.textContent='Aww you remember 🥹❤️';
+    }
     setTimeout(nextQ,1200);
   }else{
+    res.textContent="Hmm wrong 😤 wait… we'll discuss later!";
+    setTimeout(nextQ,1500);
+  }
+}else{
     res.textContent="Hmm wrong 😤 wait… we'll discuss later!";
     setTimeout(nextQ,1500);
   }
