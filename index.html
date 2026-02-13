@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Valentine ❤️</title>
 <style>
-  body{margin:0;height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at top,#1a0024,#000814);color:white;font-family:'Segoe UI',sans-serif;overflow:hidden}
-  .card{background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);padding:50px 60px;border-radius:16px;text-align:center;box-shadow:0 0 40px rgba(255,75,110,.25);width:80vw;max-width:700px;min-height:260px}
-  h1{color:#ff7aa2}
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+  body{margin:0;height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, skyblue, white);color:white;font-family:'Segoe UI',sans-serif;overflow:hidden}
+  .card{background:linear-gradient(135deg,#ffb88c,#ff6a88);color:white;padding:50px 60px;border-radius:16px;text-align:center;box-shadow:0 0 40px rgba(255,75,110,.25);width:80vw;max-width:700px;min-height:260px}
+  h1{color:#000000;font-style:italic}
   button{padding:12px 22px;border:none;border-radius:25px;margin:10px;font-size:16px;cursor:pointer}
   .yes{background:white;color:black;font-size:20px;padding:16px 28px;border:2px solid #ff7aa2}
   .no{background:#ddd}
@@ -18,9 +19,10 @@
 </head>
 <body>
 <canvas id="fire"></canvas>
+<div id="topDecor" style="position:fixed;top:10px;left:0;width:100%;text-align:center;font-size:26px;pointer-events:none">✨💖🎆💞🎇💘✨</div>
 <div class="card" id="card">
-  <h1>Hey Babu ❤️</h1>
-  <p id="text">Will you be my Valentine??</p>
+  <h1>Hey Babu❤️</h1>
+  <p id="text" style="font-family:'Dancing Script',cursive;font-size:32px;color:black;"><b><i>Will you be my Valentine??</i></b></p>
   <div id="buttons">
     <button id="yesBtn" class="yes">Yes ❤️</button>
     <button class="no" onmouseover="moveNo(this)" ontouchstart="moveNo(this)">No 😠</button>
@@ -88,6 +90,9 @@ function nextQ(){
 
 function finishLove(){
   document.getElementById('card').innerHTML=`<h1>I love you ❤️</h1><p>Happy Valentine’s Day</p><img src='photo.jpg' style='width:220px;border-radius:15px'>`;
+  // grand finale fireworks
+  clearInterval(burstTimer);
+  setInterval(()=>{burst();burst();burst();},300);
 }
 
 // floating hearts
@@ -97,6 +102,23 @@ function heart(){
  document.body.appendChild(h);setTimeout(()=>h.remove(),7000);
 }
 setInterval(heart,300);
+
+// simple top fireworks bursts periodically
+function burst(){
+  for(let i=0;i<25;i++){
+    const s=document.createElement('div');
+    s.textContent='✨';
+    s.style.position='fixed';
+    s.style.top='20px';
+    s.style.left=(Math.random()*100)+'vw';
+    s.style.fontSize=(12+Math.random()*20)+'px';
+    s.style.transition='transform 1s linear, opacity 1s linear';
+    document.body.appendChild(s);
+    setTimeout(()=>{s.style.transform='translateY(120px)';s.style.opacity='0';},50);
+    setTimeout(()=>s.remove(),1100);
+  }
+}
+let burstTimer=setInterval(burst,900);
 </script>
 </body>
 </html>
